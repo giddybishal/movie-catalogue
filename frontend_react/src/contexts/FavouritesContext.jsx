@@ -4,12 +4,14 @@ import { AuthContext } from "./AuthContext";
 export const FavouritesContext = createContext();
 
 export function FavouritesProvider({ children }) {
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
+
   const [favourites, setFavourites] = useState([]);
   const { isLoggedIn } = useContext(AuthContext)
 
   async function getFavourites() {
     try {
-      const res = await fetch("https://your-backend-url.onrender.com/movies/getMovies", {
+      const res = await fetch(`${BACKEND_URL}/movies/getMovies`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -33,7 +35,7 @@ export function FavouritesProvider({ children }) {
 
   async function addFavourite(movie) {
     try {
-      const res = await fetch("https://your-backend-url.onrender.com/movies/addMovie", {
+      const res = await fetch(`${BACKEND_URL}/movies/addMovie`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -58,7 +60,7 @@ export function FavouritesProvider({ children }) {
 
   async function deleteFavourite(movie){
     try{
-      const res = await fetch(`https://your-backend-url.onrender.com/movies/delete/${movie.tmdb_id}`, {
+      const res = await fetch(`${BACKEND_URL}/movies/delete/${movie.tmdb_id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

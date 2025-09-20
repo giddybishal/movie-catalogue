@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 export const LoginContext = createContext()
 
 export function LoginProvider({children}){
+    const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
+
     const { setUserName, setIsLoggedIn } = useContext(AuthContext)
     const navigate = useNavigate()
 
@@ -23,7 +25,7 @@ export function LoginProvider({children}){
     async function handleLogin(username, password){
         try{
             // const res = await fetch("http://127.0.0.1:8000/auth/token", {
-            const res = await fetch("https://your-backend-url.onrender.com/auth/token", {
+            const res = await fetch(`${BACKEND_URL}/auth/token`, {
                 method: "POST",
                 headers: {"Content-Type": "application/x-www-form-urlencoded"},
                 body: new URLSearchParams({
@@ -60,7 +62,7 @@ export function LoginProvider({children}){
             };
 
             // const res = await fetch("http://127.0.0.1:8000/auth/login", {
-            const res = await fetch("https://your-backend-url.onrender.com/auth/login", {
+            const res = await fetch(`${BACKEND_URL}/auth/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
