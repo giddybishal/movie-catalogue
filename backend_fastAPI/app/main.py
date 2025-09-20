@@ -9,13 +9,13 @@ from .routers import auth, movies
 
 app = FastAPI()
 
-origins = [
-    "http://localhost:5173",
-]
+# origins = [
+#     "http://localhost:5173",
+# ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,        # or ["*"] for all origins (dev only!)
+    allow_origins=["https://your-frontend-url.onrender.com"],        
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
