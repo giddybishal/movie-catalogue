@@ -15,7 +15,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://your-frontend-url.onrender.com"],        
+    allow_origins=["https://movie-catalogue-frontend-jq4e.onrender.com"],        
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
