@@ -76,19 +76,19 @@ export function LoginProvider({children}){
             
             await handleLogin(registerUsername, registerPassword)
             } else {
-      let errData = {};
-      try {
-        errData = await res.json();
-      } catch (e) {
-        errData = { detail: "Registration failed" };
-      }
-      alert(errData.detail || "Registration failed");
+                let errData = {};
+                try {
+                errData = await res.json();
+            } catch (e) {
+                errData = { detail: "Registration failed" };
+            }
+            alert(errData.detail || "Registration failed");
+            }
+        } catch (err) {
+            console.error("Registration error:", err);
+            alert("Error connecting to backend");
+        }
     }
-  } catch (err) {
-    console.error("Registration error:", err);
-    alert("Error connecting to backend");
-  }
-}
 
     return (
         <LoginContext.Provider value={{ logInUsername, setLogInUserName, logInPassword, setLogInPassword, registerUsername, setRegisterUserName, email, setEmail, firstName, setFirstName, lastName, setLastName, registerPassword, setRegisterPassword, handleLogin, handleRegister}}>

@@ -1,11 +1,11 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-import os 
+# import os 
 
-DATABASE_URL = os.environ.get("DATABASE_URL")
+# DATABASE_URL = os.environ.get("DATABASE_URL")
 
-# DATABASE_URL = 'postgresql://postgres:bishal@localhost/MovieCatalogueDatabase'
+DATABASE_URL = 'postgresql://postgres:bishal@localhost/MovieCatalogueDatabase'
 
 # Render gives "postgres://", but SQLAlchemy needs "postgresql://"
 if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
