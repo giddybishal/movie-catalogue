@@ -11,7 +11,7 @@ export function FavouritesProvider({ children }) {
 
   async function getFavourites() {
     try {
-      const res = await fetch(`${BACKEND_URL}/movies/getMovies`, {
+      const res = await fetch(`${BACKEND_URL}/favouriteMovies/getFavouriteMovies`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -35,7 +35,7 @@ export function FavouritesProvider({ children }) {
 
   async function addFavourite(movie) {
     try {
-      const res = await fetch(`${BACKEND_URL}/movies/addMovie`, {
+      const res = await fetch(`${BACKEND_URL}/favouriteMovies/addFavouriteMovie`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -45,22 +45,19 @@ export function FavouritesProvider({ children }) {
       });
 
       if (res.status === 201) {
-        // Add it to local state as well
-        setFavourites((prev) => [...prev, movie]);
-        alert(`${movie.title} added to favourites!`);
+        await getFavourites(); // Refresh state from backend
       } else {
         const errData = await res.json();
-        alert(errData.detail || "Failed to add favourite");
+        console.error(errData.detail || "Failed to add favourite");
       }
     } catch (err) {
       console.error("Error adding favourite:", err);
-      alert("Error connecting to backend");
     }
   }
 
   async function deleteFavourite(movie){
     try{
-      const res = await fetch(`${BACKEND_URL}/movies/delete/${movie.tmdb_id}`, {
+      const res = await fetch(`${BACKEND_URL}/favouriteMovies/deleteFavouriteMovie/${movie.tmdb_id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -68,8 +65,7 @@ export function FavouritesProvider({ children }) {
         },
       });
       if (res.status === 204){
-        setFavourites(prev => prev.filter(fav => fav.tmdb_id !== movie.tmdb_id))
-        alert(`${movie.title} removed from Favourite.`)
+        await getFavourites()
       } else {
         const errData = await res.json()
         alert(errData.detail || 'Failed to remove Favourite.')
@@ -81,7 +77,12 @@ export function FavouritesProvider({ children }) {
   }
 
   useEffect(() => {
-    if( isLoggedIn ) getFavourites();
+    if (isLoggedIn) {
+    getFavourites();
+  } else {
+    // Clear favourites when user logs out
+    setFavourites([]);
+  }
   }, [isLoggedIn] );
 
   return (

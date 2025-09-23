@@ -5,7 +5,7 @@ from .models import Base
 from .database import engine
 
 #For Auth and todos from routers:
-from .routers import auth, movies
+from .routers import auth, favouriteMovies
 
 app = FastAPI()
 
@@ -25,4 +25,4 @@ Base.metadata.create_all(bind=engine)
 
 #For Auth and todos from routers:
 app.include_router(auth.router)
-app.include_router(movies.router)
+app.include_router(favouriteMovies.router)

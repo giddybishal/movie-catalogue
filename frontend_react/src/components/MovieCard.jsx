@@ -6,21 +6,11 @@ function MovieCard({movie}){
 
     const { favourites, addFavourite, deleteFavourite } = useContext(FavouritesContext)
 
-    function hasSameMovie(favourites, movie){
-        for(let i = 0; i<favourites.length; i++){
-            if (favourites[i].tmdb_id === movie.tmdb_id){
-                return true
-            }
-        }
-        return false
-    }
+    const isFavourite = favourites.some(fav => fav.tmdb_id === movie.tmdb_id);
 
-    function handleFavourite(){
-        if (hasSameMovie(favourites, movie)){
-            deleteFavourite(movie)
-        } else{
-            addFavourite(movie)
-        }
+    function handleFavourite() {
+    if (isFavourite) deleteFavourite(movie);
+    else addFavourite(movie);
     }
 
     return(
@@ -38,7 +28,7 @@ function MovieCard({movie}){
                         <p>{original_language}</p>
                         <span>•</span>
                         <p>{release_date? release_date.split('-')[0]: 'N/A'}</p>
-                        <p className="text-3xl ml-auto cursor-pointer" onClick={()=>handleFavourite()}>{hasSameMovie(favourites, movie) ? '❤️' : '🤍'}</p>
+                        <p className="text-3xl ml-auto cursor-pointer" onClick={handleFavourite}>{isFavourite ? '❤️' : '🤍'}</p>
                     </div>
                 </div>
             </div>
