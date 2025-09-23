@@ -7,7 +7,6 @@ import Logo from '../components/Logo'
 import { MoviesContext } from '../contexts/MoviesContext'
 
 function Main(){
-
   const { searchTerm, setSearchTerm, errorMessage, movieList, isLoading} = useContext(MoviesContext)
 
   return(

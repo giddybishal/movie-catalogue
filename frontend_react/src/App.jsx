@@ -7,6 +7,7 @@ import { FavouritesProvider } from "./contexts/FavouritesContext";
 import { AuthProvider } from "./contexts/AuthContext";
 import { MoviesProvider } from "./contexts/MoviesContext";
 import { LoginProvider } from "./contexts/LoginContext";
+import { WatchLaterProvider } from "./contexts/WatchLaterContext";
 
 function App(){
   
@@ -15,13 +16,15 @@ function App(){
       <AuthProvider>
       <LoginProvider>
         <FavouritesProvider>
-          <MoviesProvider>
+          <WatchLaterProvider>
+            <MoviesProvider>
               <Routes>
                 <Route path="/" element={<Main />} />
                 <Route path='/login' element={<Login />} />
                 <Route path="/dashboard" element={<Dashboard />} />
               </Routes>
-          </MoviesProvider>
+            </MoviesProvider>
+          </WatchLaterProvider>
         </FavouritesProvider>
       </LoginProvider>
     </AuthProvider>

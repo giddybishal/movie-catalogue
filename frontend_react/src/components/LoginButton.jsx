@@ -51,7 +51,7 @@ function LoginButton(){
         <>
         <div className="absolute top-5 right-5 md:top-5 md:right-10 flex gap-2">
             <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-300 bg-clip-text text-transparent 
-            ">{isLoggedIn? username: ''}</span><img src="/profile-pic.jpg" alt="profile-pic" className="cursor-pointer w-10 rounded-full ring-2 ring-yellow-300 ring-offset-1 ring-offset-black transition-all hover:ring-4 hover:ring-yellow-400" onClick={handleClick}/>
+            ">{isLoggedIn && location.pathname!== '/dashboard'? username: ''}</span><img src="/profile-pic.jpg" alt="profile-pic" className="cursor-pointer w-10 rounded-full ring-2 ring-yellow-300 ring-offset-1 ring-offset-black transition-all hover:ring-4 hover:ring-yellow-400" onClick={handleClick}/>
         </div>
 
         {/* JSX Modal */}

@@ -6,6 +6,7 @@ export const AuthContext = createContext()
 export function AuthProvider({children}){
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [username, setUserName] = useState('');
+    const [ movieOptionId, setMovieOptionId] = useState(null)
 
     const logoutUser = ()=>{
         localStorage.removeItem('token')
@@ -37,7 +38,7 @@ export function AuthProvider({children}){
     }, []);
 
     return (
-        <AuthContext.Provider value={{ username, setUserName, isLoggedIn, setIsLoggedIn }}>
+        <AuthContext.Provider value={{ username, setUserName, isLoggedIn, setIsLoggedIn, movieOptionId, setMovieOptionId }}>
             {children}
         </AuthContext.Provider>
     );

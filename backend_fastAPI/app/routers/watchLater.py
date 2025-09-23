@@ -10,8 +10,8 @@ from typing import Annotated, List
 from .auth import get_current_user
 
 router = APIRouter(
-    prefix='/favouriteMovies',
-    tags=['favouriteMovies']
+    prefix='/watchLater',
+    tags=['watchLater']
 )
 
 def get_db():
@@ -38,22 +38,22 @@ class MoviesRequest(BaseModel):
         from_attributes = True
 
 # => GET METHOD
-@router.get('/getFavouriteMovies', status_code = status.HTTP_200_OK, response_model=List[MoviesRequest])
+@router.get('/getWatchLater', status_code = status.HTTP_200_OK, response_model=List[MoviesRequest])
 async def read_all(user: user_dependency, db: db_dependency):
     if user is None:
         raise HTTPException(status_code=401, detail='Authentication Failed!')
     # Explicit join between Movies and UserMovies
-    fav_movies = (
+    watch_later_movies = (
         db.query(Movies)
         .join(UserMovies, UserMovies.movie_id == Movies.id)
         .filter(UserMovies.user_id == user.get("id"))
-        .filter(UserMovies.favourite == True)
+        .filter(UserMovies.watch_later == True)
         .all()
     )
-    return fav_movies
+    return watch_later_movies
 
 # => POST METHOD
-@router.post('/addFavouriteMovie', status_code=status.HTTP_201_CREATED)
+@router.post('/addWatchLater', status_code=status.HTTP_201_CREATED)
 async def create_movie(user: user_dependency, db: db_dependency, movie_request: MoviesRequest):
     if user is None:
         raise HTTPException(status_code=401, detail='Authentication Failed!')
@@ -79,18 +79,18 @@ async def create_movie(user: user_dependency, db: db_dependency, movie_request: 
         user_movie = UserMovies(
             user_id=user.get("id"),
             movie_id=movie_model.id,
-            favourite=True
+            watch_later=True
         )
         db.add(user_movie)
     else:
-        # If it exists but favourite=False, update it
-        user_movie.favourite = True
+        # If it exists but watch_later=False, update it
+        user_movie.watch_later = True
 
     db.commit()
-    return {"detail": "Movie added to favourites"}
+    return {"detail": "Movie added to watch later"}
 
 # => DELETE METHOD
-@router.delete('/deleteFavouriteMovie/{tmdb_id}', status_code=status.HTTP_204_NO_CONTENT)
+@router.delete('/deleteWatchLater/{tmdb_id}', status_code=status.HTTP_204_NO_CONTENT)
 async def delete_movie(user: user_dependency, db: db_dependency, tmdb_id: int = Path(gt=-1)):
     if user is None:
         raise HTTPException(status_code=401, detail='Authentication Failed!')
@@ -107,13 +107,13 @@ async def delete_movie(user: user_dependency, db: db_dependency, tmdb_id: int = 
         .filter(UserMovies.movie_id == movie_model.id)
         .first()
     )
-    if not user_movie or not user_movie.favourite:
-        raise HTTPException(status_code=404, detail='Movie not in favourites.')
+    if not user_movie or not user_movie.watch_later:
+        raise HTTPException(status_code=404, detail='Movie not in watch later.')
 
-    user_movie.favourite = False
+    user_movie.watch_later = False
 
     if not (user_movie.favourite or user_movie.watch_later):
         db.delete(user_movie)
     db.commit()
 
-    return {"detail": "Movie removed from favourites"}
+    return {"detail": "Movie removed from watch later"}
