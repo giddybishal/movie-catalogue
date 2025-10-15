@@ -24,7 +24,6 @@ export function LoginProvider({children}){
     // To Login:
     async function handleLogin(username, password){
         try{
-            // const res = await fetch("http://127.0.0.1:8000/auth/token", {
             const res = await fetch(`${BACKEND_URL}/auth/token`, {
                 method: "POST",
                 headers: {"Content-Type": "application/x-www-form-urlencoded"},
@@ -61,7 +60,6 @@ export function LoginProvider({children}){
             role: "user"  // always create as regular user
             };
 
-            // const res = await fetch("http://127.0.0.1:8000/auth/login", {
             const res = await fetch(`${BACKEND_URL}/auth/login`, {
             method: "POST",
             headers: {

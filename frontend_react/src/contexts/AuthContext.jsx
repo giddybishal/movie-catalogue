@@ -19,7 +19,7 @@ export function AuthProvider({children}){
         if(token){
         try{
             const decoded = jwtDecode(token)
-
+            console.log(decoded)
             // Check expiry
             const now = Date.now() / 1000; // in seconds
             if (decoded.exp && decoded.exp < now){

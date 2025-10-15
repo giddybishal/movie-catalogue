@@ -23,7 +23,7 @@ app.add_middleware(
 )
 Base.metadata.create_all(bind=engine)
 
-#For Auth and todos from routers:
+#For Auth and movies from routers:
 app.include_router(auth.router)
 app.include_router(favouriteMovies.router)
 app.include_router(watchLater.router)
