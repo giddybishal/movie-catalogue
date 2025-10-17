@@ -5,7 +5,7 @@ from .models import Base
 from .database import engine
 
 #For Auth and todos from routers:
-from .routers import auth, favouriteMovies, watchLater
+from .routers import auth, favouriteMovies, watchLater, chatbot
 
 app = FastAPI()
 
@@ -27,3 +27,4 @@ Base.metadata.create_all(bind=engine)
 app.include_router(auth.router)
 app.include_router(favouriteMovies.router)
 app.include_router(watchLater.router)
+app.include_router(chatbot.router)

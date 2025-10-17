@@ -1,16 +1,18 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
+import { AI_ChatbotContext } from "../contexts/AI_ChatbotContext"
 
 function AI_Chatbot(){
     const [ chatActive, setChatActive ] = useState(false)
     const [ chatInput, setChatInput ] = useState('')
-    const [ chatHistory, setChatHistory] = useState([{'role':'user', 'content': 'hello'}, {'role': 'bot', 'content': 'hey there!'}])
+    const { sendMessage , chatHistory } = useContext(AI_ChatbotContext)
 
-    function handleChatInput(){
+    async function handleChatInput(){
         if (!chatInput){
             return
         }
-        setChatHistory([...chatHistory, {'role':'user', 'content': chatInput}])
+        const userMessage = chatInput
         setChatInput('')
+        await sendMessage(userMessage)
     }
     
     return(
@@ -23,8 +25,8 @@ function AI_Chatbot(){
             { chatActive && 
             <div className="w-[250px] h-[300px] md:w-[300px] md:h-[350px] bg-pink-200/95 relative bottom-15 left-11 md:bottom-20 md:left-12 rounded-md">
                 <div className="font-normal text-sm text-left h-[85%] flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-lime-800 scrollbar-track-pink-100">
-                    { chatHistory.map(chat => 
-                    <div className={chat.role === 'user' ? 'text-black  ml-auto m-1 bg-purple-400 rounded-md w-fit max-w-[60%] px-2 py-1': 'text-white m-1 mr-auto bg-cyan-800 rounded-md w-fit max-w-[60%] text-left px-2 py-1'}>
+                    { chatHistory.filter(chat => ['user', 'assistant'].includes(chat.role)).map((chat, index) => 
+                    <div key={index} className={chat.role === 'user' ? 'text-black  ml-auto m-1 bg-purple-400 rounded-md w-fit max-w-[60%] px-2 py-1': 'text-white m-1 mr-auto bg-cyan-800 rounded-md w-fit max-w-[60%] text-left px-2 py-1'}>
                         {chat.content}
                     </div>)
                 }

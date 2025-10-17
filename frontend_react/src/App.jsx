@@ -8,6 +8,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import { MoviesProvider } from "./contexts/MoviesContext";
 import { LoginProvider } from "./contexts/LoginContext";
 import { WatchLaterProvider } from "./contexts/WatchLaterContext";
+import { AI_ChatbotProvider } from "./contexts/AI_ChatbotContext";
 
 function App(){
   
@@ -18,11 +19,13 @@ function App(){
         <FavouritesProvider>
           <WatchLaterProvider>
             <MoviesProvider>
+              <AI_ChatbotProvider>
               <Routes>
                 <Route path="/" element={<Main />} />
                 <Route path='/login' element={<Login />} />
                 <Route path="/dashboard" element={<Dashboard />} />
               </Routes>
+              </AI_ChatbotProvider>
             </MoviesProvider>
           </WatchLaterProvider>
         </FavouritesProvider>
