@@ -5,13 +5,14 @@ import MovieCard from '../components/MovieCard'
 import LoginButton from '../components/LoginButton'
 import Logo from '../components/Logo'
 import { MoviesContext } from '../contexts/MoviesContext'
+import AI_Chatbot from '../components/AI_Chatbot'
 
 function Main(){
   const { searchTerm, setSearchTerm, errorMessage, movieList, isLoading} = useContext(MoviesContext)
 
   return(
     <main>
-      <div className='bg-[#0f172a] text-white text-3xl font-extrabold text-center'>
+      <div className='bg-[#0f172a] text-white text-3xl font-extrabold text-center relative'>
 
         <header className="h-screen w-full bg-cover bg-center flex flex-col justify-around items-center relative" style={{ backgroundImage: "url('/stary-bg.jpg')"}}> 
 
@@ -52,7 +53,7 @@ function Main(){
           }
 
         </section>
-
+          <AI_Chatbot />
       </div>
     </main>
     
