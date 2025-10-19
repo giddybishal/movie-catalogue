@@ -11,7 +11,7 @@ app = FastAPI()
 
 origins = [
     "http://localhost:5173",
-    "https://movie-catalogue-frontend-tcfy.onrender.com"       
+    "https://my-movie-catalogue.onrender.com"       
 ]
 
 app.add_middleware(
