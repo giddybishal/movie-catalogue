@@ -29,7 +29,8 @@ export function MoviesProvider({ children }) {
     setErrorMessage("");
 
     try {
-      const endpoint = query
+        console.log(API_KEY)
+        const endpoint = query
         ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}`
         : `${API_BASE_URL}/discover/movie?sort_by=popularity.desc`;
 
