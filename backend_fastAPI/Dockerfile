@@ -1,0 +1,12 @@
+# Stage 1: base image
+FROM python:3.13.5
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+# Use production server mode
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
