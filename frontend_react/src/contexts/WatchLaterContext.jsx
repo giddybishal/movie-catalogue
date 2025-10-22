@@ -4,7 +4,7 @@ import { AuthContext } from "./AuthContext";
 export const WatchLaterContext = createContext();
 
 export function WatchLaterProvider({ children }) {
-  const BACKEND_URL = 'https://mymoviecatalgouebackend.onrender.com'
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
   const [watchLater, setWatchLater] = useState([]);
   const { isLoggedIn } = useContext(AuthContext)

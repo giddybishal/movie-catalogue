@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 export const LoginContext = createContext()
 
 export function LoginProvider({children}){
-    const BACKEND_URL = 'https://mymoviecatalgouebackend.onrender.com'
+    const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
     const { setUserName, setIsLoggedIn } = useContext(AuthContext)
     const navigate = useNavigate()

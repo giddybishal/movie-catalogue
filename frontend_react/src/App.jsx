@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from './pages/Login'
 import Main from './pages/Main'
 import Dashboard from './pages/Dashboard'
+import WatchMovie from "./pages/WatchMovie";
 
 import { FavouritesProvider } from "./contexts/FavouritesContext";
 import { AuthProvider } from "./contexts/AuthContext";
@@ -24,6 +25,7 @@ function App(){
                 <Route path="/" element={<Main />} />
                 <Route path='/login' element={<Login />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/watchMovie/:tmdb_id" element={<WatchMovie />} />
               </Routes>
               </AI_ChatbotProvider>
             </MoviesProvider>
