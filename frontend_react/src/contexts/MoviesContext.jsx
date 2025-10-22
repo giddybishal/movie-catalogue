@@ -5,7 +5,7 @@ export const MoviesContext = createContext();
 
 export function MoviesProvider({ children }) {
   const API_BASE_URL = "https://api.themoviedb.org/3";
-  const API_KEY = import.meta.env.VITE_TMDB_API_KEY
+  const API_KEY = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwZjg4OTlhMjE5NWJmNmM4ZTgyMjlhMDM2YWFmOTYzMCIsIm5iZiI6MTczMjAyMTc4MC4wNzAwMDAyLCJzdWIiOiI2NzNjOGUxNDM1NTU0MTc5MTNiMTRmMzEiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.'
 
   const API_OPTIONS = {
     method: "GET",

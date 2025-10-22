@@ -4,7 +4,7 @@ import { AuthContext } from "./AuthContext";
 export const FavouritesContext = createContext();
 
 export function FavouritesProvider({ children }) {
-  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
+  const BACKEND_URL = 'https://mymoviecatalgouebackend.onrender.com'
 
   const [favourites, setFavourites] = useState([]);
   const { isLoggedIn } = useContext(AuthContext)
